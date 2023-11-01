@@ -7,9 +7,6 @@ export default function Button() {
     var mqtt = require('mqtt')
 
     var options = {
-        // host: 'f0080d86078244aea13c1f39b7076405.s2.eu.hivemq.cloud',
-        // port: 8884,
-        // protocol: 'mqtts',
         username: 'dajl2324nj',
         password: 'dnMA3A!Tw55WfGi'
     }
@@ -27,25 +24,27 @@ export default function Button() {
     });
 
     function sendMessage() {
-        client.on('message', function (topic, message) {
-          // called each time a message is received
-          console.log('Received message:', topic, message.toString());
-        });
-        
-        // subscribe to topic 'my/test/topic'
+
+        // subscribe to topic 'djal/patient'
         client.subscribe('djal/patient', function() {
             console.log('subscribed');
         });
         
-        // publish message 'Hello' to topic 'my/test/topic'
+        // publish message 'Hello' to topic 'djal/patient'
         client.publish('djal/patient', 'Verwant2', function() {
             console.log('published');
         });
         
-        // unsubscribe to topic 'my/test/topic'
+        // unsubscribe to topic 'djal/patient
         client.unsubscribe('djal/patient', function() {
             console.log('unsubscribed');
         });
+
+        client.on('message', function (topic, message) {
+            // called each time a message is received
+            console.log('Received message:', topic, message.toString());
+          });
+
         };
 
     return (

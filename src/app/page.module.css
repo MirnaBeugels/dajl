@@ -7,6 +7,7 @@
 }
 
 .button {
+  all: unset;
   color: floralwhite;
   background-color: firebrick;
   padding: 10px;
