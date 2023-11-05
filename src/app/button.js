@@ -35,16 +35,16 @@ export default function Button() {
             console.log('published');
         });
         
-        // unsubscribe to topic 'djal/patient
-        client.unsubscribe('djal/patient', function() {
-            console.log('unsubscribed');
-        });
 
         client.on('message', function (topic, message) {
             // called each time a message is received
             console.log('Received message:', topic, message.toString());
           });
 
+        // unsubscribe to topic 'djal/patient
+        client.unsubscribe('djal/patient', function() {
+            console.log('unsubscribed');
+        });
         };
 
     return (
