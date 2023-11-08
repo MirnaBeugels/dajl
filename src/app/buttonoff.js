@@ -2,7 +2,7 @@
 
 import styles from './page.module.css'
 
-export default function Button() {
+export default function Buttonoff() {
 
     var mqtt = require('mqtt')
 
@@ -24,7 +24,7 @@ export default function Button() {
         console.log(error);
     });
 
-    function sendMessage() {
+    function sendMessageOff() {
 
         // subscribe to topic 'djal/patient'
         client.subscribe('LampStatus071123djal', function() {
@@ -32,7 +32,7 @@ export default function Button() {
         });
         
         // publish message 'Hello' to topic 'djal/patient'
-        client.publish('LampStatus071123djal', 'true', function() {
+        client.publish('LampStatus071123djal', 'false', function() {
             console.log('published');
         });
         
@@ -49,6 +49,6 @@ export default function Button() {
         };
 
     return (
-        <button className={styles.button} onClick={sendMessage}>Lampje aan</button>
+        <button className={styles.button} onClick={sendMessageOff}>Lampje uit</button>
     )
 };
