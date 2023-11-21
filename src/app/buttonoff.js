@@ -1,10 +1,11 @@
 'use client'
 
 import styles from './page.module.css'
+import mqtt from 'mqtt'
 
 export default function Buttonoff() {
 
-    var mqtt = require('mqtt')
+    // var mqtt = require('mqtt')
 
     var options = {
         username: 'dajl2324nj',
