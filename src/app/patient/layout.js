@@ -1,3 +1,5 @@
+import Link from "next/link"
+
 export default function Patient({ children }) {
     return (
         <>
@@ -5,7 +7,7 @@ export default function Patient({ children }) {
             {children}
         </section>
         <section>
-            Dit is de footer voor de patient
+            <Link href="./instellingen">Instellingen</Link> | <Link href="./home">Home</Link> | <Link href="./lichtjes">Lichtjes</Link>
         </section>
         </>
     )
