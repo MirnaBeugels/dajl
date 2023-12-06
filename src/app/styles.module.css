@@ -18,6 +18,19 @@
     justify-content: center;
 }
 
+.logout {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.icon {
+    width: 16px;
+    height: 16px;
+    padding-left: 8px;
+}
+
 .content {
     max-width: 900px;
     padding: 32px;

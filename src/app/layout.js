@@ -1,8 +1,11 @@
 'use client'
 
+import './global.css'
 import styles from './styles.module.css'
 import Link from "next/link"
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useRef, useLayoutEffect } from 'react'
 import { gsap } from 'gsap'
 
@@ -23,85 +26,85 @@ export default function Denkaanjou({ children }) {
         blueCircleTl.to(blueCircle.current, {
             rotation: 0, 
             x: '100vw',
-            y: '100vh',
-            duration: 30,
+            y: '20vh',
+            duration: 8,
         })
         
         blueCircleTl.to(blueCircle.current, {
             rotation: 0, 
             x: '0vw',
-            y: '40vh',
-            duration: 30,
+            y: '80vh',
+            duration: 10,
         });
         
         blueCircleTl.to(blueCircle.current, {
             rotation: 0, 
-            x: '100vw',
-            y: '100vh',
-            duration: 30,
+            x: '20vw',
+            y: '0vh',
+            duration: 8,
         });
         
         blueCircleTl.to(blueCircle.current, {
             rotation: 0, 
             x: '0vw',
             y: '0vh',
-            duration: 30,
+            duration: 10,
         });
 
         pinkCircleTl.to(pinkCircle.current, {
             rotation: 0, 
-            x: '-100vw',
+            x: '-80vw',
             y: '-20vh',
-            duration: 30,
+            duration: 8,
+        })
+
+        pinkCircleTl.to(pinkCircle.current, {
+            rotation: 0, 
+            x: '-20vw',
+            y: '-40vh',
+            duration: 10,
         })
 
         pinkCircleTl.to(pinkCircle.current, {
             rotation: 0, 
             x: '0vw',
-            y: '0vh',
-            duration: 30,
-        })
-
-        pinkCircleTl.to(pinkCircle.current, {
-            rotation: 0, 
-            x: '-100vw',
             y: '50vh',
-            duration: 30,
+            duration: 8,
         })
 
         pinkCircleTl.to(pinkCircle.current, {
             rotation: 0, 
             x: '0vw',
             y: '0vh',
-            duration: 30,
+            duration: 10,
         })
 
         purpleCircleTl.to(purpleCircle.current, {
             rotation: 0, 
             x: '100vw',
-            y: '-60vh',
-            duration: 30,
+            y: '0vh',
+            duration: 10,
         })
 
         purpleCircleTl.to(purpleCircle.current, {
             rotation: 0, 
-            x: '0vw',
-            y: '-100vh',
-            duration: 30,
-        })
-
-        purpleCircleTl.to(purpleCircle.current, {
-            rotation: 0, 
-            x: '100vw',
-            y: '-60vh',
-            duration: 30,
+            x: '80vw',
+            y: '0vh',
+            duration: 8,
         })
 
         purpleCircleTl.to(purpleCircle.current, {
             rotation: 0, 
             x: '0vw',
             y: '0vh',
-            duration: 30,
+            duration: 8,
+        })
+
+        purpleCircleTl.to(purpleCircle.current, {
+            rotation: 0, 
+            x: '0vw',
+            y: '0vh',
+            duration: 10,
         })
         
         return () => { 
@@ -145,7 +148,7 @@ export default function Denkaanjou({ children }) {
         </section>
         <section className={styles.contentContainer}>
             <section className={styles.content}>
-                <nav>Hier komt de <Link href="/">uitlog</Link> functie</nav>
+                <nav className={styles.logout}><Link href="/">Uitloggen</Link> <FontAwesomeIcon icon={faArrowRightFromBracket} className={styles.icon} /></nav>
                 {children}
             </section>
         </section>
