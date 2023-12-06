@@ -2,12 +2,19 @@
 
 import './global.css'
 import styles from './styles.module.css'
+import { Josefin_Sans } from 'next/font/google'
 import Link from "next/link"
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 import { useRef, useLayoutEffect } from 'react'
 import { gsap } from 'gsap'
+
+const josefin = Josefin_Sans({
+    weight: '400',
+    subsets: ['latin'],
+    display: 'swap',
+  })
 
 export default function Denkaanjou({ children }) {
 
@@ -53,14 +60,14 @@ export default function Denkaanjou({ children }) {
 
         pinkCircleTl.to(pinkCircle.current, {
             rotation: 0, 
-            x: '-80vw',
+            x: '-100vw',
             y: '-20vh',
             duration: 8,
         })
 
         pinkCircleTl.to(pinkCircle.current, {
             rotation: 0, 
-            x: '-20vw',
+            x: '-0vw',
             y: '-40vh',
             duration: 10,
         })
@@ -113,9 +120,9 @@ export default function Denkaanjou({ children }) {
     }, []);
 
     return (
-        <html lang="en">
-        <body className={styles.body}>
-        <section className={styles.background}>
+        <html lang="en" className={josefin.className}>
+        <body>
+        <section className={styles.backgroundContainer}>
         <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh" fill="none">
             <g filter="url(#blue)">
                 <circle cx="0vw" cy="0vh" r="125" fill="#106285" ref={blueCircle}/>
@@ -149,7 +156,9 @@ export default function Denkaanjou({ children }) {
         <section className={styles.contentContainer}>
             <section className={styles.content}>
                 <nav className={styles.logout}><Link href="/">Uitloggen</Link> <FontAwesomeIcon icon={faArrowRightFromBracket} className={styles.icon} /></nav>
-                {children}
+                <section className={styles.page}>
+                    {children}
+                </section>
             </section>
         </section>
         </body>

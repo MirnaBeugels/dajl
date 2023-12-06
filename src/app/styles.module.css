@@ -1,10 +1,4 @@
-.body {
-    background-color: #1E1B2E;
-    color: #F3E6FF;
-    margin: 0;
-}
-
-.background {
+.backgroundContainer {
     width: 100vw;
     height: 100vh;
     position: fixed;
@@ -16,6 +10,8 @@
     z-index: 1;
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100vw;
 }
 
 .logout {
@@ -23,6 +19,7 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    height: 16px;
 }
 
 .icon {
@@ -32,6 +29,60 @@
 }
 
 .content {
-    max-width: 900px;
-    padding: 32px;
+    width: 100%;
+    padding: 32px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
+
+.page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex-wrap: nowrap;
+    height: calc((100vh - 64px) - 16px)
+}
+
+.loginContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.loginContainer input {
+    background: var(--input-bg-color);
+    padding: 16px 24px;
+    border-bottom: var(--input-border);
+    margin-bottom: 16px;
+}
+
+.password {
+    -webkit-text-security: disc;
+}
+
+.title {
+    font-size: 30px;
+    text-align: center;
+    padding-top: 160px;
+    padding-bottom: 80px;
+}
+
+.bottomNav {
+    text-align: center;
+    padding-bottom: 64px;
+    padding-top: 80px;
+}
+
+/* CSS Rules for tablets & desktop */
+
+@media screen and (min-width: 430px) {
+
+    .page {
+        width: 430px;
+        padding: 32px;
+    }
+
+  }

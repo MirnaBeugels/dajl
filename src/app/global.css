@@ -1,3 +1,41 @@
+*, *:before, *:after {
+    box-sizing: border-box;
+  }
+
+html {
+    --light-font-color: #F3E6FF;
+    --dark-font-color: #111315;
+    --pink-blue-gradient: linear-gradient(90deg, rgba(237,217,255,1), rgba(198,218,255,1));
+    --background-color: #1E1B2E;
+    --input-bg-color: #01010232;
+    --input-border: 1px dotted #F3E6FF75;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--light-font-color);
+    margin: 0;
+    height: 100%;
+}
+
+input, button {
+    all: unset;
+  }
+
 a {
-    color: #F3E6FF;
+    color: var(--light-font-color);
+}
+
+label {
+    font-size: 12px;
+}
+
+button {
+    padding: 16px 24px;
+    background: var(--pink-blue-gradient);
+    text-align: center;
+    color: var(--dark-font-color);
+    font-size: 120%;
+    font-weight: bold;
+    border-radius: 8px;
 }

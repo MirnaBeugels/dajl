@@ -9,14 +9,18 @@ export const metadata = {
 export default function Page() {
   return <>
     
-    <section className={styles.loginContainer}>
-      <email>Je mailadres</email>
-      <password>Je wachtwoord</password>
-      <button>Inloggen</button>
-    </section>
+    <section className={styles.title}>Denk aan jou</section>
     
-    <h1>Welkom bij het denk aan jou lampje</h1>
-    <Link href="./patient/home">Patient home</Link> | <Link href="./verwant/lichtje-sturen">Verwant home</Link>
-    <div></div>
+    <form className={styles.loginContainer}>
+        <label>Je mailadres:</label>
+        <input></input>
+        <label>Je wachtwoord:</label>
+        <input type="password" className="styles.password"></input>
+        <button>Inloggen</button>
+    </form>
+    
+    <section className={styles.bottomNav}>
+      <Link href="./patient/home">Hulp nodig?</Link>
+    </section>
   </>
 }
