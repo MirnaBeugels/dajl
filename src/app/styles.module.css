@@ -58,7 +58,7 @@
     padding: 16px 24px;
     border-bottom: var(--input-border);
     margin-bottom: 16px;
-    --light-font-color: #F3E6FF;
+    color: var(--light-font-color);
 }
 
 .hideButton {
