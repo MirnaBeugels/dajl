@@ -6,6 +6,7 @@ html {
     --light-font-color: #F3E6FF;
     --dark-font-color: #111315;
     --pink-blue-gradient: linear-gradient(90deg, rgba(237,217,255,1), rgba(198,218,255,1));
+    --dark-pink-blue-gradient: linear-gradient(90deg, rgb(245, 230, 254), rgb(227, 236, 252));
     --background-color: #1E1B2E;
     --input-bg-color: #01010232;
     --input-border: 1px dotted #F3E6FF75;
@@ -19,11 +20,11 @@ body {
 }
 
 p {
-    font-size: 20px;
+    font-size: 16px;
     line-height: 32px;
 }
 
-input, button {
+input, button, input:-internal-autofill-selected {
     all: unset;
   }
 
@@ -32,7 +33,7 @@ a {
 }
 
 label {
-    font-size: 16px;
+    font-size: 12px;
 }
 
 button {
@@ -43,6 +44,11 @@ button {
     font-size: 120%;
     font-weight: bold;
     border-radius: 8px;
+}
+
+button:hover {
+    background: var(--dark-pink-blue-gradient);
+    cursor: pointer;
 }
 
 .bottomNav {

@@ -74,15 +74,15 @@
 }
 
 .title {
-    font-size: 32px;
+    font-size: 24px;
     text-align: center;
-    padding-bottom: 80px;
+    padding-bottom: 48px;
 }
 
 .subtitle {
-    font-size: 16px;
+    font-size: 12px;
     text-align: center;
-    padding-bottom: 80px;
+    padding-bottom: 48px;
 }
 
 .bottomNav {
@@ -92,7 +92,12 @@
 }
 
 .logoutLink {
-    align-self: center;
+    align-self: flex-end;
+}
+
+.logout div:hover {
+    text-decoration: underline;
+    cursor: pointer;
 }
 
 .verwantNav {
@@ -127,8 +132,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 32px 24px;
-    background-color: #615a88;
+    padding: 24px 24px;
+    background: var(--dark-pink-blue-gradient);
     border-radius: 8px;
     max-width: 500px;
 }
@@ -143,11 +148,25 @@
 .modalTitle {
     text-align: left;
     width: 75%;
+    color: var(--dark-font-color);
 }
 
 .modalClose {
     text-align: right;
     width: 25%;
+    color: var(--dark-font-color);
+}
+
+.modalClose a {
+    text-decoration: none;
+    background: var(--background-color);
+    color: var(--light-font-color);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.modalClose a:hover {
+    text-decoration: none;
 }
 
 .modalTitle, .modalClose {
@@ -156,6 +175,7 @@
 
 .modalContent p {
     margin-bottom: 0;
+    color: var(--dark-font-color);
 }
 
 /* CSS Rules for tablets & desktop */
