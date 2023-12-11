@@ -13,49 +13,49 @@ export default function LichtjeSturen() {
     const [sender, setSender] = useState('');
     const [showModal, setShowModal] = useState(false);
 
-    // // MQTT credentials
-    // var options = {
-    //     username: 'dajl2324nj',
-    //     password: 'dnMA3A!Tw55WfGi'
-    // }
+    // MQTT credentials
+    var options = {
+        username: 'dajl2324nj',
+        password: 'dnMA3A!Tw55WfGi'
+    }
 
     // initialize MQTT Client
     var client = mqtt.connect(`wss://broker.hivemq.com:8884/mqtt`, options);
 
-    // // setup the callbacks
-    // client.on('connect', function () {
-    //   console.log('Connected');
-    //  });
+    // setup the callbacks
+    client.on('connect', function () {
+      console.log('Connected');
+     });
 
-    // client.on('error', function (error) {
-    //     console.log(error);
-    // });
+    client.on('error', function (error) {
+        console.log(error);
+    });
     
     // The send light signal function that is triggered when the button is clicked
     const sendLight = (s) => {
       s.preventDefault()
       if (sender) {
 
-        // // subscribe to topic 'djal/patient'
-        // client.subscribe('LampStatus071123djal', function() {
-        //   console.log('subscribed');
-        // });
+        // subscribe to topic 'djal/patient'
+        client.subscribe('LampStatus071123djal', function() {
+          console.log('subscribed');
+        });
       
-        // // publish message 'true' to topic 'djal/patient'
-        // client.publish('LampStatus071123djal', 'true', function() {
-        //     console.log('published');
-        // });
+        // publish message 'true' to topic 'djal/patient'
+        client.publish('LampStatus071123djal', 'true', function() {
+            console.log('published');
+        });
       
 
-        // client.on('message', function (topic, message) {
-        //     // called each time a message is received
-        //     console.log('Received message:', topic, message.toString());
-        // });
+        client.on('message', function (topic, message) {
+            // called each time a message is received
+            console.log('Received message:', topic, message.toString());
+        });
 
-        // // unsubscribe to topic 'djal/patient
-        // client.unsubscribe('LampStatus071123djal', function() {
-        //     console.log('unsubscribed');
-        // });
+        // unsubscribe to topic 'djal/patient
+        client.unsubscribe('LampStatus071123djal', function() {
+            console.log('unsubscribed');
+        });
 
       } else {
         console.log('do not send light')
