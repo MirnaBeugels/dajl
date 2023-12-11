@@ -4,6 +4,7 @@
 import styles from '../../../styles.module.css'
 import { useState } from 'react'
 import LichtjeSturenMislukt from './lichtje-sturen-mislukt';
+import LichtjeSturenGelukt from './lichtje-sturen-gelukt';
 import mqtt from 'mqtt';
 
 // Export the pages
@@ -11,7 +12,8 @@ export default function LichtjeSturen() {
 
     // Setup the changing states
     const [sender, setSender] = useState('');
-    const [showModal, setShowModal] = useState(false);
+    const [showFailModal, setShowFailModal] = useState(false);
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
 
     // MQTT credentials
     var options = {
@@ -57,9 +59,11 @@ export default function LichtjeSturen() {
             console.log('unsubscribed');
         });
 
+        setShowSuccessModal(true);
+
       } else {
         console.log('do not send light')
-        setShowModal(true);
+        setShowFailModal(true);
       }
     }
 
@@ -76,7 +80,8 @@ export default function LichtjeSturen() {
       <button type="submit">Verstuur lichtje</button>
                 
     </form>
-    {showModal && <LichtjeSturenMislukt onClose={() => setShowModal(false)}/>}
+    {showFailModal && <LichtjeSturenMislukt onClose={() => setShowFailModal(false)}/>}
+    {showSuccessModal && <LichtjeSturenGelukt onClose={() => setShowSuccessModal(false)}/>}
     
     </>
   }

@@ -130,6 +130,7 @@
     padding: 32px 24px;
     background-color: #615a88;
     border-radius: 8px;
+    max-width: 500px;
 }
 
 .modalHeaderWrapper {
