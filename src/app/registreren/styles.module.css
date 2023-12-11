@@ -1,0 +1,11 @@
+.title {
+    font-size: 16px;
+    padding-bottom: 80px;
+    text-align: center;
+}
+
+.sendButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

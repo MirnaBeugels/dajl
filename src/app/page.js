@@ -1,5 +1,6 @@
-import Link from "next/link"
+// Imports
 import styles from './styles.module.css'
+import SignIn from "./signin";
 
 export const metadata = {
     title: 'Denk aan jou',
@@ -8,19 +9,16 @@ export const metadata = {
 
 export default function Page() {
   return <>
-    
-    <section className={styles.title}>Denk aan jou</section>
-    
-    <form className={styles.loginContainer}>
-        <label>Je mailadres:</label>
-        <input></input>
-        <label>Je wachtwoord:</label>
-        <input type="password" className="styles.password"></input>
-        <button>Inloggen</button>
-    </form>
-    
-    <section className={styles.bottomNav}>
-      <Link href="./patient/home">Hulp nodig?</Link>
+  
+    <section className={styles.page}>
+        <h1 className={styles.title}>Denk aan jou</h1>
+        <div className={styles.subtitle}>
+          <p>Inloggen</p>
+        </div>
+        <SignIn />
     </section>
+
+    {/* <section className={styles.logoutLink}><Link href="/registreren">Een account maken?</Link></section> */}
+
   </>
 }
