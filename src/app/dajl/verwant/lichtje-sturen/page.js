@@ -1,17 +1,42 @@
+// This is a client component, because it uses client side rendering
 'use client'
 
-// Imports
+// Import needed styles, components & modules
 import styles from '../../../styles.module.css'
-import { useState } from 'react'
+import React, { useState, map } from 'react'
 import LichtjeSturenMislukt from './lichtje-sturen-mislukt';
 import LichtjeSturenGelukt from './lichtje-sturen-gelukt';
+import db from '../../../firestore';
 import mqtt from 'mqtt';
+import { collection, addDoc } from 'firebase/firestore';
 
-// Export the pages
+const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
+const date = new Date();
+
+// const querySnapshot = await getDocs(collection(db, "users", patient, "lamps", patient, "lights"));
+
+async function addDataToFirestore (sender, date) {
+  try {
+    const docRef = await addDoc(collection(db, `users/${patient}/lamps/${patient}/lights`), {
+      name: sender,
+      date: date,
+      seen: false,
+    });
+    console.log("document was written with ID: ", docRef.id);
+    return true
+  } catch (error) {
+    console.error("Error adding document", error)
+    return false
+  }
+}
+
+// Export the page
 export default function LichtjeSturen() {
 
-    // Setup the changing states
+    // Setup the changing states for the modal and checking if a name was filled in
     const [sender, setSender] = useState('');
+
+    // The modals' state start out as false, so modals are hidden until needed
     const [showFailModal, setShowFailModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
@@ -22,64 +47,63 @@ export default function LichtjeSturen() {
     }
 
     // initialize MQTT Client
-    var client = mqtt.connect(`wss://broker.hivemq.com:8884/mqtt`, options);
+    var client = mqtt.connect(`wss://f0080d86078244aea13c1f39b7076405.s2.eu.hivemq.cloud:8884/mqtt`, options);
 
-    // setup the callbacks
+    // Connect to the MQTT broker and setup callbacks for sucess & failure in connecting
     client.on('connect', function () {
-      console.log('Connected');
+        console.log('Connected to MQTT broker through Node-Red');
      });
 
     client.on('error', function (error) {
-        console.log(error);
+          console.log(error);
     });
     
-    // The send light signal function that is triggered when the button is clicked
-    const sendLight = (s) => {
-      s.preventDefault()
-      if (sender) {
+    // The send light signal function, this function is fired when the button is clicked
+    const sendLight = async (e) => {
 
-        // subscribe to topic 'djal/patient'
-        client.subscribe('LampStatus071123djal', function() {
-          console.log('subscribed');
-        });
+        e.preventDefault()
       
-        // publish message 'true' to topic 'djal/patient'
-        client.publish('LampStatus071123djal', 'true', function() {
-            console.log('published');
-        });
-      
+        // Check if the user filled in the name field, if so...
+        if (sender) {
 
-        client.on('message', function (topic, message) {
-            // called each time a message is received
-            console.log('Received message:', topic, message.toString());
-        });
+            // Publish message 'true' to Node Red topic to send light signal to the lamp
+            client.publish('In/Lights/Geleen/2TegYo3UlARdo7istGLxbjD8BOi2/Switch', 'true', function() {
+                console.log('light was sent');
+            });
 
-        // unsubscribe to topic 'djal/patient
-        client.unsubscribe('LampStatus071123djal', function() {
-            console.log('unsubscribed');
-        });
+            const added = await addDataToFirestore(sender, date)
 
-        setShowSuccessModal(true);
+            if (added) {
+              setSender("");
+              console.log("Data was added to Firestore")
+            };
 
-      } else {
-        console.log('do not send light')
-        setShowFailModal(true);
+            // Show the modal that the light was succesfully sent
+            setShowSuccessModal(true);
+
+        // If the user did not fill in a name, do not send the light
+        } else {
+            console.log('do not send light')
+            setShowFailModal(true);
+        }
       }
-    }
 
-    return <>
-    <form className={styles.loginContainer} onSubmit={sendLight}>
-    
-      <h2 className={styles.title}>Stuur een lichtje</h2>
-      <p>Vul je naam in en druk op de knop om een lichtje te versturen...</p> 
+      return <>
+      {/* The form te send a signal, on submit fire the senLight function */}
+      <form className={styles.loginContainer} onSubmit={sendLight}>
+      
+          <h2 className={styles.title}>Stuur een lichtje</h2>
+          <p>Vul je naam in en druk op de knop om een lichtje te versturen...</p> 
 
-      <section className={styles.sendButton}></section>
-          
-      <label>Je naam:</label>
-      <input value={sender} onChange={(s) => setSender(s.target.value)}></input>
-      <button type="submit">Verstuur lichtje</button>
+          <section className={styles.sendButton}></section>
+              
+          <label>Je naam:</label>
+          <input value={sender} onChange={(s) => setSender(s.target.value)}></input>
+          <button type="submit">Verstuur lichtje</button>
                 
     </form>
+
+    {/* The modals for succeeded of failed light signals, onClose the modals state is set to false so they are hidden again */}
     {showFailModal && <LichtjeSturenMislukt onClose={() => setShowFailModal(false)}/>}
     {showSuccessModal && <LichtjeSturenGelukt onClose={() => setShowSuccessModal(false)}/>}
     

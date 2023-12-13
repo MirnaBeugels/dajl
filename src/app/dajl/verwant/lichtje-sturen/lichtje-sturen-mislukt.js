@@ -1,4 +1,6 @@
+// This modal shows when sending a light signal has failed
 
+// Import needed styles, modules & components
 import styles from '../../../styles.module.css'
 
 const LichtjeSturenMislukt = ({ onClose }) => {

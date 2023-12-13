@@ -1,5 +1,8 @@
-// Imports
+// The Firebase component makes a connection with the Firebase service
+
+// Import the needed components, modules & styles
 import { initializeApp } from "firebase/app";
+import { getFirestore } from "firebase/firestore"
 import { getAuth } from "firebase/auth";
 
 // Firebase config
@@ -12,10 +15,10 @@ const firebaseConfig = {
   appId: "1:24645235052:web:37903dceeca7c85424c349"
 };
 
-//Firebase init
+//Firebase initialization
 const app = initializeApp(firebaseConfig);
 
-// Initialize Firebase Authentication and get a reference to the service
-const auth = getAuth(app);
+// Initialize Firestore and get a reference to the service
+const db = getFirestore(app);
 
-export default auth;
+export default db;

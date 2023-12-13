@@ -1,4 +1,6 @@
+// This modal shows when sending a light signal has succeeded
 
+// Import needed styles, modules & components
 import styles from '../../../styles.module.css'
 
 const LichtjeSturenGelukt = ({ onClose }) => {
