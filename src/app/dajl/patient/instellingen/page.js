@@ -1,8 +1,23 @@
-export const metadata = {
-        title: 'Denk aan jou | Instellingen',
-        description: 'Stuur een denk aan jou lichtje',
-  }
+import styles from '../../../styles.module.css'
+import NavPatient from '../nav'
+import Pause from './pause'
+import Brightness from './brightness'
 
 export default function Instellingen() {
-        return <h1>Instellingen</h1>
+
+
+      return <>
+
+      <h2 className={styles.title}>Instellingen</h2>
+
+            <div className={styles.centered}>
+                  <Pause />
+                  <Brightness />
+            </div>
+
+      <button type="submit" >Instellingen Opslaan</button>
+            
+      <NavPatient />
+
+      </>
   }

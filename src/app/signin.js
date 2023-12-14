@@ -2,7 +2,7 @@
 // This is a client component because the SignIn function uses client side rendering for updating states
 'use client'
 
-// Import needed styles and components
+// Import needed styles, modules and components
 import styles from './styles.module.css'
 import { useState } from 'react';
 import auth from './firebase';
@@ -10,6 +10,7 @@ import db from './firestore';
 import { doc, getDoc } from 'firebase/firestore'
 import { signInWithEmailAndPassword} from 'firebase/auth';
 import { useRouter } from 'next/navigation';
+import InloggenMislukt from './inloggen-mislukt'
 
 // The sign in component function
 const SignIn = () => {
@@ -17,7 +18,9 @@ const SignIn = () => {
     // Needed constants
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showLoginFailModal, setShowLoginFailModal] = useState(false);
     const router = useRouter();
+    
 
     // The Sign in function
     const signIn = (e) => {
@@ -59,6 +62,7 @@ const SignIn = () => {
             })
 
         }).catch((error) => {
+            setShowLoginFailModal(true);
             console.log(error);
         })
     };
@@ -69,7 +73,7 @@ const SignIn = () => {
         // On typing in the password and email fields, the password and email constant are updated using client side rendering
         // On submit the signIn function is fired 
         // After signing in a user with the patient role is redirected to the ./dajl/patient/home and a user with verwant role to ./dajl/verwant/lichtje-sturen 
-
+        <>
         <form className={styles.loginContainer} onSubmit={signIn}>
             <label>Je mailadres:</label>
             <input value={email} autoComplete="email" onChange={(e) => setEmail(e.target.value)}></input>
@@ -77,6 +81,10 @@ const SignIn = () => {
             <input type="password" autoComplete="current-password" className="styles.password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
             <button type="submit" >Inloggen</button>
         </form>
+        
+        {/* The modals for succeeded of failed light signals, onClose the modals state is set to false so they are hidden again */}
+        {showLoginFailModal && <InloggenMislukt onClose={() => setShowLoginFailModal(false)}/>}
+        </>
 
     );
 
