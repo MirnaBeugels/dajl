@@ -1,78 +1,61 @@
-// This is a client component, because it uses client side rendering
 'use client'
 
-// Import needed styles, modules and components
-import styles from '../../../styles.module.css'
-
-//Steps:
-// Listen to changes in database and update info when new light signals come in
+import { useEffect, useState } from 'react';
+import { collection, query, onSnapshot, orderBy, getDocs } from 'firebase/firestore';
+import db from '../../../firestore';
+import styles from '../../../styles.module.css';
 
 const LightsOverview = () => {
+  const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
+  const [lightsDataArray, setLightsDataArray] = useState([]);
 
-    return(
-        <>
+  useEffect(() => {
+    let unsubscribed = false;
 
-            <div className={styles.lightsOverviewContainer}>
+    const lightsCollectionRef = collection(db, `users/${patient}/lamps/${patient}/lights`);
+    const lightsQuery = query(lightsCollectionRef, orderBy('date', 'desc')); // Order by date in descending order
 
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam:</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
+    const fetchData = async () => {
+      try {
+        const querySnapshot = await getDocs(lightsQuery);
+        if (unsubscribed) return;
 
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
+        const newLightsDataArray = querySnapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          readabletime: doc.data().date.toDate().toLocaleString("nl-NL", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "numeric",
+            minute: "numeric",
+            hour12: false,
+          }),
+        }));
 
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
+        setLightsDataArray(newLightsDataArray);
+        console.log(newLightsDataArray);
+      } catch (error) {
+        if (unsubscribed) return;
+        console.error("Failed to retrieve data", error);
+      }
+    };
 
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
+    fetchData();
 
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
+    return () => (unsubscribed = true);
+  }, []);
 
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
-
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
-
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
-
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
-
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
-
-                <div className={styles.lightSignal}>
-                    <div className={styles.lightName}>Naam</div>
-                    <div className={styles.lightDate}>25 Juni 2023 | 12:25</div>
-                </div>
-
-            </div>
-
-        </>
-    )
-}
+  return (
+    <div className={styles.lightsOverviewContainer}>
+      {lightsDataArray.map((lightsData) => (
+        <div className={styles.lightSignal} key={lightsData.id}>
+          <div className={styles.lightName}>{lightsData.name}: </div>
+          <div className={styles.lightDate}>{lightsData.readabletime}</div>
+        </div>
+      ))}
+    </div>
+  );
+};
 
 export default LightsOverview;
