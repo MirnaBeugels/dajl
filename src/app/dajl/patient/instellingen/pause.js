@@ -7,9 +7,11 @@ import { faToggleOn } from '@fortawesome/free-solid-svg-icons'
 import { faToggleOff } from '@fortawesome/free-solid-svg-icons'
 import { useState } from 'react';
 
-const Pause = () => {
+export default function Pause({ pause, setPause }) {
 
-    const [pause, setPause] = useState(false);
+    console.log(pause);
+
+    // const [pause, setPause] = useState(false);
 
     return( <>
 
@@ -21,5 +23,3 @@ const Pause = () => {
         </>
     )
 };
-
-export default Pause;

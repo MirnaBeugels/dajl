@@ -6,11 +6,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 import React, { useState } from 'react';
 
-const Brightness = () => {
+export default function Brightness({ brightness, setBrightness }) {
+
+
     const min = 0;
     const max = 100;
 
-    const [brightness, setBrightness] = useState(min);
+    // // const [brightness, setBrightness] = useState(min);
 
     const clamp = (min, max) => (value) => (value <= min ? min : value >= max ? max : value);
     const clampV = clamp(min, max);
@@ -23,6 +25,7 @@ const Brightness = () => {
 
     return (
         <>
+
             <div className={styles.dropdownMenuButtonContainer}>
                 <div className={styles.dropdownMenuUpDownButton}>
                     <FontAwesomeIcon
@@ -43,5 +46,3 @@ const Brightness = () => {
         </>
     );
 };
-
-export default Brightness;
