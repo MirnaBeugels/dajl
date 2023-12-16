@@ -14,6 +14,20 @@ const SvgAnimation = () => {
     const pinkCircle = useRef();
     const purpleCircle = useRef();
 
+    const imageWidth = 400; // Set the width of your images
+
+    const calculatePosition = (offsetX, offsetY) => {
+        const vw = window.innerWidth / 100;
+        const vh = window.innerHeight / 100;
+        const x = offsetX * vw - imageWidth / 2;
+        const y = offsetY * vh - imageWidth / 2;
+        return { x, y };
+      };
+
+    const blueCirclePosition = calculatePosition(0, 0);
+    const pinkCirclePosition = calculatePosition(100, 50);
+    const purpleCirclePosition = calculatePosition(0, 100);
+
     // With a useLayoutEffect we can make our animation
     useLayoutEffect(() => {
         
@@ -121,9 +135,30 @@ const SvgAnimation = () => {
     return (
 
         <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh" fill="none">
-            <image href="./blue-circle.png" x={`calc(0vw - 200px)`} y={`calc(0vh - 200px)`} width="400px" height="400px" ref={blueCircle}/>
-            <image href="./pink-circle.png" x={`calc(100vw - 200px)`} y={`calc(50vh - 200px)`} width="400px" height="400px" ref={pinkCircle}/>
-            <image href="./purple-circle.png"x={`calc(0vw - 200px)`} y={`calc(100vh - 200px)`} width="400px" height="400px" ref={purpleCircle}/>
+            <image
+                href="./blue-circle.png"
+                x={blueCirclePosition.x}
+                y={blueCirclePosition.y}
+                width={`${imageWidth}px`}
+                height={`${imageWidth}px`}
+                ref={blueCircle}
+            />
+            <image 
+                href="./pink-circle.png"
+                x={pinkCirclePosition.x}
+                y={pinkCirclePosition.y}
+                width={`${imageWidth}px`}
+                height={`${imageWidth}px`}
+                ref={pinkCircle}
+            />
+            <image 
+                href="./purple-circle.png"
+                x={purpleCirclePosition.x}
+                y={purpleCirclePosition.y}
+                width={`${imageWidth}px`}
+                height={`${imageWidth}px`}
+                ref={purpleCircle}
+            />
         </svg>
 
     );
