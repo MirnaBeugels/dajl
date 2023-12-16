@@ -2,6 +2,7 @@
 'use client'
 
 // Import the needed components, modules & styles
+import styles from './styles.module.css';
 import { useRef, useLayoutEffect } from 'react'
 import { gsap } from 'gsap'
 
@@ -120,37 +121,10 @@ const SvgAnimation = () => {
     return (
 
         <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh" fill="none">
-        <g filter="url(#blue)">
-            {/* The blue circle */}
-            <circle cx="0vw" cy="0vh" r="125" fill="#106285" ref={blueCircle}/>
-        </g>
-        <g filter="url(#pink)">
-            {/* The pink circle */}
-            <circle cx="100vw" cy="50vh" r="125" fill="#891184" ref={pinkCircle}/>
-        </g>
-        <g filter="url(#purple)">
-            {/* The purple circle */}
-            <circle cx="0vw" cy="100vh" r="125" fill="#5B1189" ref={purpleCircle}/>
-        </g>
-        <defs>
-            {/* The filters to create the blurred edges on the circles */}
-            <filter id="blue" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse">
-                <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                <feGaussianBlur result="effect1_foregroundBlur_60_2259" stdDeviation="50"/>
-            </filter>
-            <filter id="pink" colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse">
-                <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                <feGaussianBlur result="effect1_foregroundBlur_60_2259" stdDeviation="50"/>
-            </filter>
-            <filter id="purple"colorInterpolationFilters="sRGB" filterUnits="userSpaceOnUse">
-                <feFlood floodOpacity="0" result="BackgroundImageFix"/>
-                <feBlend in="SourceGraphic" in2="BackgroundImageFix" result="shape"/>
-                <feGaussianBlur result="effect1_foregroundBlur_60_2259" stdDeviation="50"/>
-            </filter>
-        </defs>
-    </svg>
+            <image href="./blue-circle.png" x={`calc(0vw - 250px)`} y={`calc(0vh - 250px)`} width="500px" height="500px" ref={blueCircle}/>
+            <image href="./pink-circle.png" x={`calc(100vw - 250px)`} y={`calc(50vh - 250px)`} width="500px" height="500px" ref={pinkCircle}/>
+            <image href="./purple-circle.png"x={`calc(0vw - 250px)`} y={`calc(100vh - 250px)`} width="500px" height="500px" ref={purpleCircle}/>
+        </svg>
 
     );
 
