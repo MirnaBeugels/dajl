@@ -121,9 +121,9 @@ const SvgAnimation = () => {
     return (
 
         <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh" fill="none">
-            <image href="./blue-circle.png" x={`calc(0vw - 250px)`} y={`calc(0vh - 250px)`} width="500px" height="500px" ref={blueCircle}/>
-            <image href="./pink-circle.png" x={`calc(100vw - 250px)`} y={`calc(50vh - 250px)`} width="500px" height="500px" ref={pinkCircle}/>
-            <image href="./purple-circle.png"x={`calc(0vw - 250px)`} y={`calc(100vh - 250px)`} width="500px" height="500px" ref={purpleCircle}/>
+            <image href="./blue-circle.png" x={`calc(0vw - 200px)`} y={`calc(0vh - 200px)`} width="400px" height="400px" ref={blueCircle}/>
+            <image href="./pink-circle.png" x={`calc(100vw - 200px)`} y={`calc(50vh - 200px)`} width="400px" height="400px" ref={pinkCircle}/>
+            <image href="./purple-circle.png"x={`calc(0vw - 200px)`} y={`calc(100vh - 200px)`} width="400px" height="400px" ref={purpleCircle}/>
         </svg>
 
     );
