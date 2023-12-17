@@ -26,6 +26,8 @@ p {
 
 input, button, input:-internal-autofill-selected {
     all: unset;
+    font-size: 16px;
+    font-family: var(--font-josefin);
   }
 
 a {
@@ -33,7 +35,7 @@ a {
 }
 
 label {
-    font-size: 12px;
+    font-size: 16px;
 }
 
 button {

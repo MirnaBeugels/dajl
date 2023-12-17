@@ -12,6 +12,7 @@ const josefin = Josefin_Sans({
     weight: '400',
     subsets: ['latin'],
     display: 'swap',
+    variable: '--font-josefin'
   })
 
 export default function Denkaanjou({ children }) {
