@@ -152,7 +152,7 @@ const SvgAnimation = () => {
 
         <svg xmlns="http://www.w3.org/2000/svg" width="100vw" height="100vh" fill="none">
             <image
-                href="./blue-circle.png"
+                href="/blue-circle.png"
                 x={initialPositions.blueCircle?.x}
                 y={initialPositions.blueCircle?.y}
                 width={`${imageWidth}px`}
@@ -161,7 +161,7 @@ const SvgAnimation = () => {
                 className={styles.circles}
             />
             <image 
-                href="./pink-circle.png"
+                href="/pink-circle.png"
                 x={initialPositions.pinkCircle?.x}
                 y={initialPositions.pinkCircle?.y}
                 width={`${imageWidth}px`}
@@ -170,7 +170,7 @@ const SvgAnimation = () => {
                 className={styles.circles}
             />
             <image 
-                href="./purple-circle.png"
+                href="/purple-circle.png"
                 x={initialPositions.purpleCircle?.x}
                 y={initialPositions.purpleCircle?.y}
                 width={`${imageWidth}px`}

@@ -174,7 +174,8 @@
     text-decoration: none;
 }
 
-.modalTitle, .modalClose {
+.modalTitle, 
+.modalClose {
     font-size: 24px;
 }
 
@@ -212,7 +213,9 @@
     margin-bottom: 8px;
 }
 
-.dropdownMenuSaveButtonOn, .dropdownMenuSaveButtonOff, .dropdownMenuUpDownButton {
+.dropdownMenuSaveButtonOn, 
+.dropdownMenuSaveButtonOff, 
+.dropdownMenuUpDownButton {
     background: var(--input-bg-color);
     padding: 16px 24px;
     color: var(--light-font-color);
@@ -242,7 +245,8 @@
     text-align: center;
 }
 
-.dropdownMenuButton:hover, .dropdownMenuItem {
+.dropdownMenuButton:hover, 
+.dropdownMenuItem {
     cursor: pointer;
 }
 
