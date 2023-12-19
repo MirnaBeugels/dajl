@@ -25,6 +25,7 @@ p {
 }
 
 input, button, input:-internal-autofill-selected {
+    -webkit-appearance: none;
     all: unset;
     font-size: 16px;
     font-family: var(--font-josefin);

@@ -1,6 +1,7 @@
-// The Authdetails component listens for changes in the logged in status of a user
+// The Checkuser component listens for changes in the logged in status of a user
 // It also makes a record of the logged in user so we know what type of user is logged in
 // And if they are on a page that they are allowed to view/use
+// If not they are sent to the correct page
 
 // This component uses client side rendering and is a client component
 'use client'
