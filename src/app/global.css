@@ -24,7 +24,7 @@ p {
     line-height: 32px;
 }
 
-input, button, input:-internal-autofill-selected {
+input, button {
     -webkit-appearance: none;
     all: unset;
     font-size: 16px;
