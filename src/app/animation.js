@@ -36,9 +36,13 @@ const SvgAnimation = () => {
         });
         
         // Create a GSAP timeline for each circle
-        var blueCircleTl = gsap.timeline({repeat: -1})
-        var pinkCircleTl = gsap.timeline({repeat: -1})
-        var purpleCircleTl = gsap.timeline({repeat: -1})
+        var blueCircleTl = gsap.timeline({repeat: 0})
+        var pinkCircleTl = gsap.timeline({repeat: 0})
+        var purpleCircleTl = gsap.timeline({repeat: 0})
+
+        var blueCircleTl1 = gsap.timeline({repeat: -1})
+        var pinkCircleTl1 = gsap.timeline({repeat: -1})
+        var purpleCircleTl1 = gsap.timeline({repeat: -1})
 
         // The blue circle moves 100vw to the right and 20vh down from it's starting position in 8 seconds
         blueCircleTl.to(blueCircle.current, {
@@ -55,7 +59,6 @@ const SvgAnimation = () => {
             x: '0vw',
             y: '80vh',
             duration: 10,
-            autoAlpha:1
         });
         
         // Then the blue circle moves 20vw to the right and 0vh down from its previous position in 8 seconds
@@ -64,7 +67,6 @@ const SvgAnimation = () => {
             x: '20vw',
             y: '0vh',
             duration: 8,
-            autoAlpha:1,
         });
         
         // Lastly the blue circle moves back to its starting point, so when the timeline keeps repeating it starts again in the right place
@@ -73,7 +75,6 @@ const SvgAnimation = () => {
             x: '0vw',
             y: '0vh',
             duration: 10,
-            autoAlpha:1,
         });
 
         // The pink circle (to know how it works, check the comments for the blue circle)
@@ -90,7 +91,6 @@ const SvgAnimation = () => {
             x: '-0vw',
             y: '-40vh',
             duration: 10,
-            autoAlpha:1,
         })
 
         pinkCircleTl.to(pinkCircle.current, {
@@ -98,7 +98,6 @@ const SvgAnimation = () => {
             x: '0vw',
             y: '50vh',
             duration: 8,
-            autoAlpha:1,
         })
 
         pinkCircleTl.to(pinkCircle.current, {
@@ -106,7 +105,6 @@ const SvgAnimation = () => {
             x: '0vw',
             y: '0vh',
             duration: 10,
-            autoAlpha:1,
         })
 
         // The purple circle (to know how it works, check the comments for the blue circle)
@@ -123,7 +121,6 @@ const SvgAnimation = () => {
             x: '80vw',
             y: '0vh',
             duration: 8,
-            autoAlpha:1,
         })
 
         purpleCircleTl.to(purpleCircle.current, {
@@ -131,7 +128,6 @@ const SvgAnimation = () => {
             x: '0vw',
             y: '0vh',
             duration: 8,
-            autoAlpha:1,
         })
 
         purpleCircleTl.to(purpleCircle.current, {
@@ -139,7 +135,96 @@ const SvgAnimation = () => {
             x: '0vw',
             y: '0vh',
             duration: 10,
-            autoAlpha:1,
+        })
+
+        // The blue circle moves 100vw to the right and 20vh down from it's starting position in 8 seconds
+        blueCircleTl1.to(blueCircle.current, {
+            rotation: 0, 
+            x: '100vw',
+            y: '20vh',
+            duration: 8,
+        })
+        
+        // Then the blue circle moves 0vw to horizontally and 80vh down from its previous position in 10 seconds
+        blueCircleTl1.to(blueCircle.current, {
+            rotation: 0, 
+            x: '0vw',
+            y: '80vh',
+            duration: 10,
+        });
+        
+        // Then the blue circle moves 20vw to the right and 0vh down from its previous position in 8 seconds
+        blueCircleTl1.to(blueCircle.current, {
+            rotation: 0, 
+            x: '20vw',
+            y: '0vh',
+            duration: 8,
+        });
+        
+        // Lastly the blue circle moves back to its starting point, so when the timeline keeps repeating it starts again in the right place
+        blueCircleTl1.to(blueCircle.current, {
+            rotation: 0, 
+            x: '0vw',
+            y: '0vh',
+            duration: 10,
+        });
+
+        // The pink circle (to know how it works, check the comments for the blue circle)
+        pinkCircleTl1.to(pinkCircle.current, {
+            rotation: 0, 
+            x: '-100vw',
+            y: '-20vh',
+            duration: 8,
+        })
+
+        pinkCircleTl1.to(pinkCircle.current, {
+            rotation: 0, 
+            x: '-0vw',
+            y: '-40vh',
+            duration: 10,
+        })
+
+        pinkCircleTl1.to(pinkCircle.current, {
+            rotation: 0, 
+            x: '0vw',
+            y: '50vh',
+            duration: 8,
+        })
+
+        pinkCircleTl1.to(pinkCircle.current, {
+            rotation: 0, 
+            x: '0vw',
+            y: '0vh',
+            duration: 10,
+        })
+
+        // The purple circle (to know how it works, check the comments for the blue circle)
+        purpleCircleTl1.to(purpleCircle.current, {
+            rotation: 0, 
+            x: '100vw',
+            y: '0vh',
+            duration: 10,
+        })
+
+        purpleCircleTl1.to(purpleCircle.current, {
+            rotation: 0, 
+            x: '80vw',
+            y: '0vh',
+            duration: 8,
+        })
+
+        purpleCircleTl1.to(purpleCircle.current, {
+            rotation: 0, 
+            x: '0vw',
+            y: '0vh',
+            duration: 8,
+        })
+
+        purpleCircleTl1.to(purpleCircle.current, {
+            rotation: 0, 
+            x: '0vw',
+            y: '0vh',
+            duration: 10,
         })
         
         return () => { 
