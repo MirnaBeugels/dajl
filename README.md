@@ -4,7 +4,7 @@ Het denk aan jou lampje is een project van Fontys ICT met als doel het verbetere
 
 ## Team
 
-Front-end development, design & UX:
+Front-end development & design:
 Mirna Beugels
 
 Hardware & back-end development
