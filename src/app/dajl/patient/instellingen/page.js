@@ -30,7 +30,8 @@ async function addDataToFirestore(pause, brightness) {
     };
 
     // Initialize MQTT Client
-    const client = mqtt.connect(`wss://f0080d86078244aea13c1f39b7076405.s2.eu.hivemq.cloud:8884/mqtt`, options);
+    // const client = mqtt.connect(`wss://f0080d86078244aea13c1f39b7076405.s2.eu.hivemq.cloud:8884/mqtt`, options);
+    var client = mqtt.connect('wss://broker.hivemq.com:8884/mqtt');
 
     // Connect to the MQTT broker and set up callbacks for success & failure in connecting
     client.on('connect', function () {
