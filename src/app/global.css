@@ -1,7 +1,12 @@
+/* This is the Global CSS file
+It contains all css rules for global elements without a class or id applied to them */
+
+/* This CSS rules makes it easier to calculate widths & hights because border-box ensures that the border is calculated within the width of an element */
 *, *:before, *:after {
     box-sizing: border-box;
   }
 
+/* These variables for colors ensure th */
 html {
     --light-font-color: #F3E6FF;
     --dark-font-color: #111315;

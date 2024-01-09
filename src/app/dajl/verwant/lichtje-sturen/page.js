@@ -13,6 +13,8 @@ import { collection, addDoc } from 'firebase/firestore';
 const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
 const date = new Date();
 
+console.log(date);
+
 // const querySnapshot = await getDocs(collection(db, "users", patient, "lamps", patient, "lights"));
 
 async function addDataToFirestore (sender, date) {
@@ -47,6 +49,7 @@ export default function LichtjeSturen() {
     }
 
     // initialize MQTT Client
+    // var client = mqtt.connect(`wss://f0080d86078244aea13c1f39b7076405.s2.eu.hivemq.cloud:8884/mqtt`, options);
     var client = mqtt.connect(`wss://f0080d86078244aea13c1f39b7076405.s2.eu.hivemq.cloud:8884/mqtt`, options);
 
     // Connect to the MQTT broker and setup callbacks for sucess & failure in connecting
@@ -67,7 +70,7 @@ export default function LichtjeSturen() {
         if (sender) {
 
             // Publish message 'true' to Node Red topic to send light signal to the lamp
-            client.publish('In/Lights/Geleen/2TegYo3UlARdo7istGLxbjD8BOi2/Switch', 'true', function() {
+            client.publish('In/Lights/Location/qggrVblFaQbcpslyTPRdU2cSBHy1/Switch', 'true', function() {
                 console.log('light was sent');
             });
 

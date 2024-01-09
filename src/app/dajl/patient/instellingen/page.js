@@ -44,14 +44,14 @@ async function addDataToFirestore(pause, brightness) {
     // MQTT cannot receive objects, turn the value into a string before sending it
     const pauseToString = JSON.stringify(pause.pause);
     // Send the pause value to the pause topic @ MQTT
-    client.publish('In/Lights/Geleen/2TegYo3UlARdo7istGLxbjD8BOi2/Pause', pauseToString, function () {
+    client.publish('In/Lights/Location/qggrVblFaQbcpslyTPRdU2cSBHy1/Pause', pauseToString, function () {
       console.log('Pause state was sent');
     });
 
     // MQTT cannot receive objects, turn the value into a string before sending it
     const brightnessToString = JSON.stringify(brightness.brightness);
     // Send the brightness value to the level topic at MQTT
-    client.publish('In/Lights/Geleen/2TegYo3UlARdo7istGLxbjD8BOi2/Level', brightnessToString, function () {
+    client.publish('In/Lights/Location/qggrVblFaQbcpslyTPRdU2cSBHy1/Level', brightnessToString, function () {
       console.log('Brightness state was sent');
     });
 
