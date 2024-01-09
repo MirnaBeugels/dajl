@@ -50,7 +50,7 @@ export default function LichtjeSturen() {
 
     // initialize MQTT Client
     // var client = mqtt.connect(`wss://f0080d86078244aea13c1f39b7076405.s2.eu.hivemq.cloud:8884/mqtt`, options);
-    var client = mqtt.connect('ws://broker.hivemq.com:8000/mqtt');
+    var client = mqtt.connect('wws://broker.hivemq.com:8884/mqtt');
 
     // Connect to the MQTT broker and setup callbacks for sucess & failure in connecting
     client.on('connect', function () {
