@@ -24,9 +24,11 @@ export default function Brightness({ brightness, setBrightness }) {
     };
 
     function showBrightness() {
-        if (brightness == 51) {
+        if (brightness == 0) {
+            return <span>0</span>
+        } else if (brightness == 51) {
             return <span>20</span>
-        } else if (brightness == 102) {
+        }else if (brightness == 102) {
             return <span>40</span>
         } else if (brightness == 153) {
             return <span>60</span>
