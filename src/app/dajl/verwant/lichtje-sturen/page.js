@@ -11,7 +11,6 @@ import mqtt from 'mqtt';
 import { collection, addDoc } from 'firebase/firestore';
 
 const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
-const date = new Date();
 
 console.log(date);
 
@@ -63,6 +62,8 @@ export default function LichtjeSturen() {
     
     // The send light signal function, this function is fired when the button is clicked
     const sendLight = async (e) => {
+
+        const date = new Date();
 
         e.preventDefault()
       

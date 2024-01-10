@@ -10,7 +10,7 @@ export default function Brightness({ brightness, setBrightness }) {
 
 
     const min = 0;
-    const max = 100;
+    const max = 255;
 
     // // const [brightness, setBrightness] = useState(min);
 
@@ -30,7 +30,7 @@ export default function Brightness({ brightness, setBrightness }) {
                 <div className={styles.dropdownMenuUpDownButton}>
                     <FontAwesomeIcon
                         icon={faMinus}
-                        onClick={() => handleBrightnessChange(brightness - 20)}
+                        onClick={() => handleBrightnessChange(brightness - 51)}
                         disabled={disableMin}
                     />
                 </div>
@@ -38,7 +38,7 @@ export default function Brightness({ brightness, setBrightness }) {
                 <div className={styles.dropdownMenuUpDownButton}>
                     <FontAwesomeIcon
                         icon={faPlus}
-                        onClick={() => handleBrightnessChange(brightness + 20)}
+                        onClick={() => handleBrightnessChange(brightness + 51)}
                         disabled={disableMax}
                     />
                 </div>
