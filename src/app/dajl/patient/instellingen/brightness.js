@@ -23,6 +23,22 @@ export default function Brightness({ brightness, setBrightness }) {
         setBrightness(clampV(value));
     };
 
+    function showBrightness() {
+        if (brightness == 51) {
+            return <span>20</span>
+        } else if (brightness == 102) {
+            return <span>40</span>
+        } else if (brightness == 153) {
+            return <span>60</span>
+        } else if (brightness == 204) {
+            return <span>80</span>
+        } else if (brightness == 255) {
+            return <span>100</span>
+        } else {
+            return <span>Onjuiste waarde</span>
+        }
+    }
+
     return (
         <>
 
@@ -34,7 +50,7 @@ export default function Brightness({ brightness, setBrightness }) {
                         disabled={disableMin}
                     />
                 </div>
-                <div className={styles.dropdownMenuButtonCenter}>Helderheid: {brightness}%</div>
+                <div className={styles.dropdownMenuButtonCenter}>Helderheid: {showBrightness()}%</div>
                 <div className={styles.dropdownMenuUpDownButton}>
                     <FontAwesomeIcon
                         icon={faPlus}
