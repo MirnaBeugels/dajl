@@ -11,7 +11,7 @@ import mqtt from 'mqtt';
 import { collection, addDoc } from 'firebase/firestore';
 
 const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
-const date = "";
+var date = "";
 
 console.log(date);
 
