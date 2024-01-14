@@ -14,11 +14,7 @@ import InstellingenOpslaanMislukt from './instellingen-opslaan-mislukt';
 const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
 const min = 0;
 
-// The modals' state start out as false, so modals are hidden until needed
-const [showFailModal, setShowFailModal] = useState(false);
-const [showSuccessModal, setShowSuccessModal] = useState(false);
-
-async function addDataToFirestore(pause, brightness) {
+async function addDataToFirestore(pause, brightness, setShowSuccessModal, setShowFailModal) {
 
   try {
     const docRef = doc(db, `users/${patient}/lamps/${patient}`);
@@ -76,6 +72,9 @@ async function addDataToFirestore(pause, brightness) {
 
 export default function Instellingen() {
 
+  const [showFailModal, setShowFailModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+
   const [pause, setPause] = useState(false);
   const [brightness, setBrightness] = useState(min);
 
@@ -88,7 +87,7 @@ export default function Instellingen() {
         <Brightness brightness={brightness} setBrightness={setBrightness} />
       </div>
 
-      <button type="submit" onClick={() => addDataToFirestore({ pause }, { brightness })}>
+      <button type="submit" onClick={() => addDataToFirestore({ pause }, { brightness }, setShowSuccessModal, setShowFailModal)}>
         Instellingen Opslaan
       </button>
 
