@@ -8,6 +8,8 @@ import { doc, updateDoc } from 'firebase/firestore';
 import NavPatient from '../nav';
 import Pause from './pause';
 import Brightness from './brightness';
+import InstellingenOpslaanGelukt from './instellingen-opslaan-gelukt';
+import InstellingenOpslaanMislukt from './instellingen-opslaan-mislukt';
 
 const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
 const min = 0;
@@ -56,16 +58,25 @@ async function addDataToFirestore(pause, brightness) {
       console.log('Brightness state was sent');
     });
 
+    // Show the modal that the light was succesfully sent
+    setShowSuccessModal(true);
+
     return true;
   } catch (error) {
     console.error("Error writing to document", error);
+    setShowFailModal(true);
     return false;
   }
 }
 
 export default function Instellingen() {
+
   const [pause, setPause] = useState(false);
   const [brightness, setBrightness] = useState(min);
+
+  // The modals' state start out as false, so modals are hidden until needed
+  const [showFailModal, setShowFailModal] = useState(false);
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
 
   return (
     <>
@@ -81,6 +92,11 @@ export default function Instellingen() {
       </button>
 
       <NavPatient />
+
+      {/* The modals for succeeded of failed light signals, onClose the modals state is set to false so they are hidden again */}
+      {showFailModal && <LichtjeSturenMislukt onClose={() => setShowFailModal(false)}/>}
+      {showSuccessModal && <LichtjeSturenGelukt onClose={() => setShowSuccessModal(false)}/>}
+
     </>
   );
 }
