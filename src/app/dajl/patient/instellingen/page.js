@@ -14,7 +14,12 @@ import InstellingenOpslaanMislukt from './instellingen-opslaan-mislukt';
 const patient = "qggrVblFaQbcpslyTPRdU2cSBHy1";
 const min = 0;
 
+// The modals' state start out as false, so modals are hidden until needed
+const [showFailModal, setShowFailModal] = useState(false);
+const [showSuccessModal, setShowSuccessModal] = useState(false);
+
 async function addDataToFirestore(pause, brightness) {
+
   try {
     const docRef = doc(db, `users/${patient}/lamps/${patient}`);
 
@@ -74,10 +79,6 @@ export default function Instellingen() {
   const [pause, setPause] = useState(false);
   const [brightness, setBrightness] = useState(min);
 
-  // The modals' state start out as false, so modals are hidden until needed
-  const [showFailModal, setShowFailModal] = useState(false);
-  const [showSuccessModal, setShowSuccessModal] = useState(false);
-
   return (
     <>
       <h2 className={styles.title}>Instellingen</h2>
@@ -94,8 +95,8 @@ export default function Instellingen() {
       <NavPatient />
 
       {/* The modals for succeeded of failed light signals, onClose the modals state is set to false so they are hidden again */}
-      {showFailModal && <LichtjeSturenMislukt onClose={() => setShowFailModal(false)}/>}
-      {showSuccessModal && <LichtjeSturenGelukt onClose={() => setShowSuccessModal(false)}/>}
+      {showFailModal && <InstellingenOpslaanMislukt onClose={() => setShowFailModal(false)}/>}
+      {showSuccessModal && <InstellingenOpslaanGelukt onClose={() => setShowSuccessModal(false)}/>}
 
     </>
   );
