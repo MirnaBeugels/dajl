@@ -4,10 +4,15 @@
 import styles from '../../../styles.module.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import React, { useState } from 'react';
+import { useEffect } from 'react';
 
 export default function Brightness({ brightness, setBrightness }) {
 
+    console.log("Brightness.js:" , brightness);
+
+    useEffect(() => {
+        console.log("Brightness.js - useEffect: brightness updated to", brightness)
+    }, [brightness]);
 
     const min = 0;
     const max = 255;

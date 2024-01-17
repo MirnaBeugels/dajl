@@ -3,8 +3,8 @@
 import styles from '../../../styles.module.css';
 import db from '../../../firestore';
 import mqtt from 'mqtt';
-import { useState } from 'react';
-import { doc, updateDoc } from 'firebase/firestore';
+import { useState, useEffect } from 'react';
+import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import NavPatient from '../nav';
 import Pause from './pause';
 import Brightness from './brightness';
@@ -74,9 +74,41 @@ export default function Instellingen() {
 
   const [showFailModal, setShowFailModal] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
-
   const [pause, setPause] = useState(false);
   const [brightness, setBrightness] = useState(min);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Function to fetch the pause value from Firestore
+    async function fetchCurrentSettings() {
+      try {
+        const docRef = doc(db, `users/${patient}/lamps/${patient}`);
+        const docSnap = await getDoc(docRef);
+        console.log("docSnap:" , docSnap);
+
+        if (docSnap.exists()) {
+          // If the document exists, update the state with the pause value
+          const pauseValueObject = docSnap.data().pause;
+          const pauseBooleanValue = pauseValueObject.pause;
+          const brightnessValueObject = docSnap.data().brightness;
+          const brightnessBooleanValue = brightnessValueObject.brightness;
+          setPause(pauseBooleanValue);
+          setBrightness(brightnessBooleanValue);
+        }
+      } catch (error) {
+        console.error("Error reading document", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    // Call the fetchPauseValue function when the component mounts
+    fetchCurrentSettings();
+  }, []); // Empty dependency array ensures the effect runs once on mount
+
+  if (loading) {
+    return <p className={styles.centered}>Laden...</p>;
+  }
 
   return (
     <>

@@ -10,7 +10,6 @@ const NavPatient = () => {
     var path = "";
     var page = "";
     const pathname = usePathname();
-    console.log(pathname);
 
     if (pathname == "/dajl/patient/instellingen") {
       path = "/dajl/patient/home";

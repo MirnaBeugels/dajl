@@ -5,17 +5,19 @@ import styles from '../../../styles.module.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faToggleOn } from '@fortawesome/free-solid-svg-icons'
 import { faToggleOff } from '@fortawesome/free-solid-svg-icons'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Pause({ pause, setPause }) {
 
-    console.log(pause);
+    console.log("Pause.js:" , pause);
 
-    // const [pause, setPause] = useState(false);
+    useEffect(() => {
+        console.log("Pause.js - useEffect: pause updated to", pause)
+    }, [pause]);
 
     return( <>
 
-        <div className={styles.dropdownMenuButtonContainer} onClick={() => { pause ? (setPause(false)) : (setPause(true)) }}>
+        <div className={styles.dropdownMenuButtonContainer} onClick={() => setPause(!pause)}>
             <div className={styles.dropdownMenuButton}>{ pause ? (<>Pauze: aan</>) : (<>Pause: uit</>) }</div>
             <div className={ pause ? (styles.dropdownMenuSaveButtonOff) : (styles.dropdownMenuSaveButtonOn) }><FontAwesomeIcon icon={ pause ? faToggleOn : faToggleOff } className={styles.closeicon} /></div>
         </div>
