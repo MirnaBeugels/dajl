@@ -4,7 +4,7 @@ import styles from '../../../styles.module.css';
 import db from '../../../firestore';
 import mqtt from 'mqtt';
 import { useState, useEffect } from 'react';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { doc, collection, getDoc, getDocs, updateDoc, setDoc, deleteDoc } from 'firebase/firestore';
 import NavPatient from '../nav';
 import Pause from './pause';
 import Brightness from './brightness';
@@ -17,8 +17,27 @@ const min = 0;
 async function addDataToFirestore(pause, brightness, setShowSuccessModal, setShowFailModal) {
 
   try {
-    const docRef = doc(db, `users/${patient}/lamps/${patient}`);
+    
+    const toSavePause = pause.pause
 
+    if (!toSavePause) {
+      // Reference the collections
+      const bufferCollectionRef = collection(db, `users/${patient}/lamps/${patient}/buffer`);
+      const lightsCollectionRef = collection(db, `users/${patient}/lamps/${patient}/lights`);
+      // Get all documents in the buffer collection
+      const querySnapshot = await getDocs(bufferCollectionRef);
+      // Loop through the documents and save them to the lights collection
+    querySnapshot.forEach(async (bufferDoc) => {
+      const lightsDocRef = doc(lightsCollectionRef, bufferDoc.id);
+      await setDoc(lightsDocRef, bufferDoc.data());
+      const bufferDocRef = doc(bufferCollectionRef, bufferDoc.id);
+      await deleteDoc(bufferDocRef);
+    });
+    } else {
+      console.log("Lamp is going to be paused, not transferring lights from buffer")
+    }
+
+    const docRef = doc(db, `users/${patient}/lamps/${patient}`);
     await updateDoc(docRef, {
       brightness: brightness,
       pause: pause,

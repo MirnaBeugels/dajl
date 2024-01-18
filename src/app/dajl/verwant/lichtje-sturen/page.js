@@ -3,7 +3,8 @@
 
 // Import needed styles, components & modules
 import styles from '../../../styles.module.css'
-import React, { useState, map } from 'react'
+import { useState, useEffect } from 'react'
+import { doc, getDoc } from 'firebase/firestore';
 import LichtjeSturenMislukt from './lichtje-sturen-mislukt';
 import LichtjeSturenGelukt from './lichtje-sturen-gelukt';
 import db from '../../../firestore';
@@ -17,14 +18,25 @@ console.log(date);
 
 // const querySnapshot = await getDocs(collection(db, "users", patient, "lamps", patient, "lights"));
 
-async function addDataToFirestore (sender, date) {
+async function addDataToFirestore (sender, date, pause) {
   try {
-    const docRef = await addDoc(collection(db, `users/${patient}/lamps/${patient}/lights`), {
-      name: sender,
-      date: date,
-      seen: false,
-    });
-    console.log("document was written with ID: ", docRef.id);
+    if (pause) {
+      const docRef = await addDoc(collection(db, `users/${patient}/lamps/${patient}/buffer`), {
+        name: sender,
+        date: date,
+        seen: false,
+      });
+      console.log("document was written with ID: ", docRef.id);
+    } else {
+      console.log("pause is:" ,pause)
+      const docRef = await addDoc(collection(db, `users/${patient}/lamps/${patient}/lights`), {
+        name: sender,
+        date: date,
+        seen: false,
+      });
+      console.log("document was written with ID: ", docRef.id);
+    }
+    
     return true
   } catch (error) {
     console.error("Error adding document", error)
@@ -37,10 +49,40 @@ export default function LichtjeSturen() {
 
     // Setup the changing states for the modal and checking if a name was filled in
     const [sender, setSender] = useState('');
-
-    // The modals' state start out as false, so modals are hidden until needed
+    const [pause, setPause] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [showFailModal, setShowFailModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+
+    useEffect(() => {
+      // Function to fetch the pause value from Firestore
+      async function fetchCurrentSettings() {
+        try {
+          const docRef = doc(db, `users/${patient}/lamps/${patient}`);
+          const docSnap = await getDoc(docRef);
+          console.log("docSnap:" , docSnap);
+  
+          if (docSnap.exists()) {
+            // If the document exists, update the state with the pause value
+            const pauseValueObject = docSnap.data().pause;
+            const pauseBooleanValue = pauseValueObject.pause;
+            console.log(pauseBooleanValue);
+            setPause(pauseBooleanValue);
+          }
+        } catch (error) {
+          console.error("Error reading document", error);
+        } finally {
+          setLoading(false);
+        }
+      }
+  
+      // Call the fetchPauseValue function when the component mounts
+      fetchCurrentSettings();
+    }, []); // Empty dependency array ensures the effect runs once on mount
+  
+    if (loading) {
+      return <p className={styles.centered}>Laden...</p>;
+    }
 
     // MQTT credentials
     var options = {
@@ -76,7 +118,7 @@ export default function LichtjeSturen() {
                 console.log('light was sent');
             });
 
-            const added = await addDataToFirestore(sender, date)
+            const added = await addDataToFirestore(sender, date, pause)
 
             if (added) {
               setSender("");
